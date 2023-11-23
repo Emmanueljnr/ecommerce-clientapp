@@ -4,6 +4,26 @@ import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-
 import Product from '../../components/Product';
 import {useStateContext} from '../../context/StateContext';
 
+const handleBuyNow = async (product, quantity) => {
+  console.log("Buy Now clicked", product, quantity); // This line is for debugging
+  
+  // Call your API endpoint to create a Stripe Checkout Session
+  const response = await fetch('/api/create-checkout-session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ product, quantity }),
+  });
+
+  const session = await response.json();
+
+  // Redirect to Stripe Checkout
+  if (session.url) {
+    window.location.href = session.url;
+  }
+};
+
 
 const ProductDetails = ({product, products}) => {
   const { image, name, details, price } = product;
@@ -55,7 +75,8 @@ const ProductDetails = ({product, products}) => {
               </div>
               <div className="buttons">
                 <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-                <button type="button" className="buy-now" onClick="">Buy Now</button>
+                {/* <button type="button" className="buy-now" onClick="">Buy Now</button> */}
+                <button type="button" className="buy-now" onClick={() => handleBuyNow(product, qty)}>Buy Now</button>
               </div>
             </div>
           </div>
