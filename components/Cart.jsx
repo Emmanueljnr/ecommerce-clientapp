@@ -27,13 +27,10 @@ const Cart = () => {
     
     const data = await response.json();
 
-    toast.loading('Redirecting...');
+    //toast.loading('Redirecting...');
 
     stripe.redirectToCheckout({ sessionId: data.id });
   }
-
-
-
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -55,11 +52,6 @@ const Cart = () => {
             </Link>
           </div>
           )}
-          {/* <div className='product-container'>
-            {cartItems.length >= 1 && cartItems.map((item) => {
-              <div className='product' key={item._id}>
-                <img src={urlFor(item?.image[0])} alt="" className='cart-product-image' /> */}
-
         <div className="product-container">
           {cartItems.length >= 1 && cartItems.map((item) => (
             <div className="product" key={item._id}>
@@ -93,8 +85,6 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className='btn-container'>
-            {/* <button type="button" className='btn' onClick={() => handleCheckout(product, qty)}>Checkout </button> */}
-            {/* <button type="button" className="buy-now" onClick={() => handleBuyNow(product, qty)}>Buy Now</button> */}
             <button type="button" className="btn" onClick={handleCheckout}>
                 Pay with Stripe
               </button>

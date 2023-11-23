@@ -94,73 +94,7 @@ const ProductDetails = ({product, products}) => {
         </div>
       )
     }
-//       <div>
-//           <div className='product-detail-container'>
-//               <div className='image-container'>
-//                   <img src={urlFor(image && image[index])} alt="" />
-//               </div>
-//               <div className="small-images-container">
-//             {image?.map((item, i) => (
-//               <img 
-//                 key={i}
-//                 src={urlFor(item)}
-//                 className={i === index ? 'small-image selected-image' : 'small-image'}
-//                 onMouseEnter={() => setIndex(i)}
-//               />
-//             ))}
-//           </div>
 
-
-//               <div className='product-detail-desc'>
-//                   <h1>{name}</h1> {/*product name e.g 'Sony Headphones'*/}
-//                   <div className="reviews">
-//                       <div>
-//                           <AiFillStar />
-//                           <AiFillStar />
-//                           <AiFillStar />
-//                           <AiFillStar />
-//                           <AiOutlineStar />
-//                       </div>
-//                       <p>
-//                           (20)
-//                       </p>
-//                   </div>
-
-
-
-//                   <h4>Details: </h4>
-//                   <p>{details}</p>
-//                   <p className='price'>${price}</p> {/* item's price */}
-
-//                   <div className="quantity">
-//                       <h3>Quantity:</h3>
-//                       <p className="quantity-desc">
-//                           <span className="minus" onClick=""><AiOutlineMinus /></span>
-//                           <span className="num" onClick="">0</span>
-//                           <span className="plus" onClick=""><AiOutlinePlus /></span>
-//                       </p>
-//                   </div>
-//                   <div className='buttons'>
-//                     <button type='button' className='add-to-cart' onClick="">Add To Cart</button>
-//                     <button type='button' className='buy-now' onClick="">Buy Now</button>
-//                   </div>
-//               </div>
-//           </div>
-
-//           <div className='maylike-products-wrapper'>
-//             <h2>You May Also Like</h2>
-//             <div className='marquee'>
-//                 <div className='maylike-products-container track'>
-//                     {products.map((item) => (
-//                         <Product key={item._id}
-//                          product={item} />
-//                     ))};
-//                 </div>
-//             </div>
-//           </div>
-//       </div>
-//   )
-// }
 
 export const getStaticPaths = async () => {
     const query = `*[_type == "product"] {
