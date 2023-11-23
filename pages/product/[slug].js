@@ -105,7 +105,8 @@ export const getStaticPaths = async () => {
     `;
   
     const products = await client.fetch(query);
-  
+    console.log("Products for paths:", products); //-------------- NEW -------------------
+
     const paths = products.map((product) => ({
       params: { 
         slug: product.slug.current
@@ -116,10 +117,14 @@ export const getStaticPaths = async () => {
       paths,
       fallback: 'blocking'
     }
+
+    
   }
 
 //https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props
 export const getStaticProps = async ({params :{slug}}) => {
+
+    console.log("Fetching product for slug:", slug); //-------------- NEW -------------------
     const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
     const productsQuery = `*[_type == "product"]`
 

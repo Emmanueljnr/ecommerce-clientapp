@@ -1,5 +1,6 @@
 // pages/index.js
 import React, { useEffect } from 'react';
+import Link from 'next/link'; // using next/Link to modify each link
 import '../styles/global.css';
 import { Product, FooterBanner, HeroBanner } from '../components';
 import { useStateContext } from '../context/StateContext';
@@ -24,6 +25,15 @@ const Home = () => {
       <div className='products-container'>
         {products.map((product) => <Product key={product._id} product={product} />)}
       </div>
+      {/* <div className='products-container'>
+        {products.map((product) => (
+          <Link href={`/product/${product.slug}`} key={product._id}>
+            <a>
+              <Product product={product} />
+            </a>
+          </Link>
+        ))}
+      </div> */}
 
       <FooterBanner footerBanner={bannerData && bannerData[0]} />
     </div>
