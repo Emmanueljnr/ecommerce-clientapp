@@ -24,7 +24,7 @@ largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) 
                   </Link>
               </div>
 
-              <img src={urlFor(image)} className='footer-banner-image' alt="" />
+              <image alt="Footer-Banner-Image" src={urlFor(image)} className='footer-banner-image' />
           </div>
       </div>
   )

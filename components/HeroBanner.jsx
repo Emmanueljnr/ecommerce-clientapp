@@ -9,7 +9,7 @@ function HeroBanner({heroBanner}) {
             <p className='beats-solo'> {heroBanner.smallText} </p> {/* SMALL TEXT  */}
             <h3>{heroBanner.midText}</h3> {/* MID TEXT  */}
             <h1>{heroBanner.largeText1}</h1>
-            <img src={urlFor(heroBanner.image)} alt="headphones"  className='hero-banner-image'/>
+            <image src={urlFor(heroBanner.image)} alt="Hero-Banner-Image"  className='hero-banner-image'/>
 
             <div>
                 <Link href={`/product/${heroBanner.product}`}>
