@@ -10,7 +10,6 @@ export default async function handler(req, res) {
     try {
       // Log the request body to see what data is being received
       console.log("Received data from client:", req.body);
-      const imageUrl = urlFor(product.image[0]).url();
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -19,7 +18,7 @@ export default async function handler(req, res) {
             currency: 'usd',
             product_data: {
               name: product.name,
-              // images: [imageUrl],
+              images: [product.image[0]],
               // Add more product details if necessary
             },
             unit_amount: product.price * 100, // Assuming price is in USD

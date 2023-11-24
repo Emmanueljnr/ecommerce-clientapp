@@ -3,10 +3,14 @@ import {client, urlFor} from '../../lib/client';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import Product from '../../components/Product';
 import {useStateContext} from '../../context/StateContext';
+import productsData  from '../../data/productsData' // Importing my local banner data (mock data)
 
+
+//Code for 'Buy Now Button/Option'
 const handleBuyNow = async (product, quantity) => {
   console.log("Buy Now clicked", product, quantity); // This line is for debugging
-  
+  console.log("Buy Now clicked", product.image[0]);
+
   // Call your API endpoint to create a Stripe Checkout Session
   const response = await fetch('/api/create-checkout-session', {
     method: 'POST',
@@ -24,8 +28,33 @@ const handleBuyNow = async (product, quantity) => {
   }
 };
 
+export const getStaticPaths = async () => {
+  // Generate paths from local products data
+  const paths = productsData.map((product) => ({
+    params: { slug: product.slug },
+  }));
+
+  //return { paths, fallback: 'blocking' }; //Ensures that the pages are rendered server-side before being served to the user
+  return { paths, fallback: false }; //This approach will cause Next.js to pre-render every product page during the build process
+};
+
+export const getStaticProps = async ({ params: { slug } }) => {
+  // Find the product by slug in local products data
+  const product = productsData.find((p) => p.slug === slug);
+  // Use a subset of products for the "You may also like" section
+  const relatedProducts = productsData.filter((p) => p.slug !== slug);
+
+  return {
+    props: { product, products: relatedProducts },
+  };
+};
 
 const ProductDetails = ({product, products}) => {
+    // If product is null, render a message or redirect
+    if (!product) {
+      return <div>Product not found</div>;
+    }
+  
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const {incQty, decQty, qty, onAdd} = useStateContext();
@@ -96,45 +125,46 @@ const ProductDetails = ({product, products}) => {
     }
 
 
-export const getStaticPaths = async () => {
-    const query = `*[_type == "product"] {
-      slug {
-        current
-      }
-    }
-    `;
+// export const getStaticPaths = async () => {
+//     const query = `*[_type == "product"] {
+//       slug {
+//         current
+//       }
+//     }
+//     `;
   
-    const products = await client.fetch(query);
-    console.log("Products for paths:", products); //-------------- NEW -------------------
+//     const products = await client.fetch(query);
+//     console.log("Products for paths:", products); //-------------- NEW -------------------
 
-    const paths = products.map((product) => ({
-      params: { 
-        slug: product.slug.current
-      }
-    }));
+//     const paths = products.map((product) => ({
+//       params: { 
+//         slug: product.slug.current
+//       }
+//     }));
   
-    return {
-      paths,
-      fallback: 'blocking'
-    }
+//     return {
+//       paths,
+//       fallback: 'blocking'
+//     }  
+// }
 
-    
-  }
+
+
 
 //https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props
-export const getStaticProps = async ({params :{slug}}) => {
 
-    console.log("Fetching product for slug:", slug); //-------------- NEW -------------------
-    const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
-    const productsQuery = `*[_type == "product"]`
+// export const getStaticProps = async ({params :{slug}}) => {
 
-    const product = await client.fetch(query);
-    const products = await client.fetch(productsQuery);
+//     console.log("Fetching product for slug:", slug); //-------------- NEW -------------------
+//     const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
+//     const productsQuery = `*[_type == "product"]`
+
+//     const product = await client.fetch(query);
+//     const products = await client.fetch(productsQuery);
   
-    return {
-      props: { products, product }
-    }
-  }
-
+//     return {
+//       props: { products, product }
+//     }
+// }
 
 export default ProductDetails

@@ -25,16 +25,6 @@ const Home = () => {
       <div className='products-container'>
         {products.map((product) => <Product key={product._id} product={product} />)}
       </div>
-      {/* <div className='products-container'>
-        {products.map((product) => (
-          <Link href={`/product/${product.slug}`} key={product._id}>
-            <a>
-              <Product product={product} />
-            </a>
-          </Link>
-        ))}
-      </div> */}
-
       <FooterBanner footerBanner={bannerData && bannerData[0]} />
     </div>
   );
