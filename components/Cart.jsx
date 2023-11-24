@@ -6,6 +6,8 @@ import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
 import { urlFor } from '../lib/client';
 import getStripe from '../lib/getStripe';
+import Image from 'next/image'
+
 
 
 
@@ -55,7 +57,14 @@ const Cart = () => {
         <div className="product-container">
           {cartItems.length >= 1 && cartItems.map((item) => (
             <div className="product" key={item._id}>
-              <image alt="In-Cart-Product-Image" src={urlFor(item?.image[0])} className="cart-product-image" />
+              <Image 
+                // src={urlFor(item?.image[0])}
+                src={urlFor(item?.image[0]).url()}
+                alt="In-Cart-Product-Image"  
+                className="cart-product-image" 
+                width={500} 
+                height={300}
+              />
               <div className='item-desc'>
                 <div className='flex top'>
                   <h5>{item.name}</h5>
@@ -66,7 +75,7 @@ const Cart = () => {
                       <p className="quantity-desc">
                         {/* My 'toggleCartItemQuanitity' function in the StateContext is set to look for a value that is either 'inc' or 'dec' */}
                       <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec')}><AiOutlineMinus /></span>
-                      <span className="num" onClick="">{item.quantity}</span>
+                      <span className="num" onClick={() => console.log('cart quantity button clicked')}>{item.quantity}</span>
                       <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc')}><AiOutlinePlus /></span>
                     </p>
                   </div>

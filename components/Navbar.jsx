@@ -14,7 +14,7 @@ const Navbar = () => {
       </p>
       <div className='icons-container'>
 
-        <button type="button" className='login-icon' onClick="">
+        <button type="button" className='login-icon' onClick={() => console.log('Navbar Login Button clicked')}>
           <AiOutlineUser />
         </button>
         <button type="button" className='cart-icon' onClick={() => setShowCart(true)}>

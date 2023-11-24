@@ -4,6 +4,7 @@ import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-
 import Product from '../../components/Product';
 import {useStateContext} from '../../context/StateContext';
 import productsData  from '../../data/productsData' // Importing my local banner data (mock data)
+import Image from 'next/image'
 
 
 const ProductDetails = ({product, products}) => { 
@@ -36,21 +37,32 @@ const handleBuyNow = async (product, quantity) => {
   // }
 };
 
+
   return (
         <div>
           <div className="product-detail-container">
             <div>
               <div className="image-container">
-                <image alt="Product-Detail-Page-Image(large)" src={urlFor(image && image[index])} className="product-detail-image" />
+                {/* <Image alt="Product-Detail-Page-Image(large)" src={urlFor(image && image[index])} className="product-detail-image" width={500} height={300}/> */}
+                <Image 
+                  alt="Product-Detail-Page-Image(large)" 
+                  src={urlFor(image && image[index]).url()} 
+                  className="product-detail-image" 
+                  width={500} 
+                  height={300}
+                />
+
               </div>
               <div className="small-images-container">
                 {image?.map((item, i) => (
-                  <image 
+                  <Image 
                     alt="Product-Detail-Page-Image(small)"
                     key={i}
-                    src={urlFor(item)}
+                    // src={urlFor(item)}
+                    src={urlFor(item).url()}
                     className={i === index ? 'small-image selected-image' : 'small-image'}
                     onMouseEnter={() => setIndex(i)}
+                    width={500} height={300}
                   />
                 ))}
               </div>
@@ -83,7 +95,6 @@ const handleBuyNow = async (product, quantity) => {
               </div>
               <div className="buttons">
                 <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-                {/* <button type="button" className="buy-now" onClick="">Buy Now</button> */}
                 <button type="button" className="buy-now" onClick={() => handleBuyNow(product, qty)}>Buy Now</button>
               </div>
             </div>

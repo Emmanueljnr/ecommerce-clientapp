@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
 import {urlFor} from '../lib/client';
+import Image from 'next/image'
 
 const FooterBanner = ({ footerBanner: {discount, largeText1, 
 largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) => {
@@ -23,8 +24,16 @@ largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) 
                    <button type='button'>{buttonText}</button>
                   </Link>
               </div>
-
-              <image alt="Footer-Banner-Image" src={urlFor(image)} className='footer-banner-image' />
+              {/* {console.log("my image url is", urlFor(image).url())} */}
+              <Image 
+                // src={urlFor(image)} 
+                src={urlFor(image).url()} 
+                alt="Footer-Banner-Image" 
+                className='footer-banner-image' 
+                width={500} 
+                height={300}
+                priority //this tells next.js to prioritize loading this image (since its on the home page )           
+                />
           </div>
       </div>
   )
