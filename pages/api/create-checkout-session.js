@@ -1,7 +1,7 @@
 // pages/api/create-checkout-session.js
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-import productsData from '../../data/productsData'; // Importing your local products data
+import productsData from '../../data/productsData'; // Importing my local products data
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
