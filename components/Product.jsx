@@ -1,31 +1,31 @@
-import React from 'react'
+import React from 'react';
 import Link from 'next/link';
-import {urlFor} from '../lib/client';
+import productsData from '../data/productsData'; // Importing my local products data
 import Image from 'next/image';
 
-const Product = ({ product: {image, name, slug, price}}) => {
+const Product = ({ product: { image, name, slug, price } }) => {
+  // Find the product in your local data based on the slug or another unique identifier
+  const localProduct = productsData.find(p => p.slug === slug);
+  // Use the first image URL directly from your local data
+  const imageUrl = localProduct.image[0];
+
   return (
     <div>
-        
-        <Link href={`/product/${slug}`}>   {/* <Link href={`/product/${slug.current}`}> */}
-
+      <Link href={`/product/${slug}`}>
         <div className='product-card'>
-        {/* {console.log("Image URL:", urlFor(image && image[0]).url())} */}
-         <Image 
-          // src={urlFor(image && image[0])}
-          src={urlFor(image && image[0]).url()}
-          alt="Product-Image"
-          className="product-image"
-          width={250}
-          height={250}
+          <Image 
+            src={imageUrl}
+            alt="Product-Image"
+            className="product-image"
+            width={250}
+            height={250}
           />
-            <p className='product-name'> {name} </p>
-            <p className='product-price'> ${price} </p>
-
+          <p className='product-name'>{name}</p>
+          <p className='product-price'>${price}</p>
         </div>
-        </Link>
+      </Link>
     </div>
-  )
+  );
 }
 
-export default Product
+export default Product;

@@ -1,10 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import {urlFor} from '../lib/client';
-import Image from 'next/image'
+import Image from 'next/image';
+import bannerData from '../data/bannerData'; // Importing my local banner data
 
 
 function HeroBanner({heroBanner}) {
+  const localBanner = bannerData.find(b => b.product === heroBanner.product);   // Find the banner data by matching the product
+  const imageUrl = localBanner ? localBanner.image : '';   // Use the image URL from my local banner data
+
+
   return (
     <div className='hero-banner-container'>
         <div>
@@ -12,8 +16,7 @@ function HeroBanner({heroBanner}) {
             <h3>{heroBanner.midText}</h3> {/* MID TEXT  */}
             <h1>{heroBanner.largeText1}</h1>
             <Image 
-                // src={urlFor(heroBanner.image)} 
-                src={urlFor(heroBanner.image).url()} 
+                src={imageUrl} 
                 alt="Hero-Banner-Image"  
                 className='hero-banner-image'
                 width={500} 

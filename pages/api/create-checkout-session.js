@@ -1,15 +1,18 @@
 // pages/api/create-checkout-session.js
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-import {urlFor} from '../../lib/client';
+import productsData from '../../data/productsData'; // Importing your local products data
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { product, quantity } = req.body;
 
     try {
-      // Log the request body to see what data is being received
       console.log("Received data from client:", req.body);
+
+      // Retrieve the image URL from the local product data
+      const localProductData = productsData.find(p => p.slug === product.slug);
+      const imageUrl = localProductData.image[0];
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -18,8 +21,7 @@ export default async function handler(req, res) {
             currency: 'usd',
             product_data: {
               name: product.name,
-              images: [product.image[0]],
-              // Add more product details if necessary
+              images: [imageUrl], // Using the local image URL from your productsData
             },
             unit_amount: product.price * 100, // Assuming price is in USD
           },
@@ -27,7 +29,7 @@ export default async function handler(req, res) {
         }],
         mode: 'payment',
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/?paymentCancelled=true`, // This redirects to the home page
+        cancel_url: `${req.headers.origin}/?paymentCancelled=true`, // Redirects to the home page
       });
 
       res.status(200).json({ url: session.url });

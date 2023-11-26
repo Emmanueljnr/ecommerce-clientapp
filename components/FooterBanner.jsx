@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
 import Link from 'next/link';
-import {urlFor} from '../lib/client';
-import Image from 'next/image'
+import bannerData from '../data/bannerData'; // Importing my local banner data
+import Image from 'next/image';
 
-const FooterBanner = ({ footerBanner: {discount, largeText1, 
-largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) => {
-  return (
+
+const FooterBanner = ({ footerBanner: {discount, largeText1, largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) => {
+// Since `footerBanner` is an object from the `bannerData.js` file, and `product` is the slug to find the specific banner...
+const localBanner = bannerData.find(b => b.product === product);
+const imageUrl = localBanner.image; // Directly use the image URL from my local data
+  
+ 
+    return (
       <div className="footer-banner-container">
           <div className='banner-desc'>
               {/* Left side of the footer */}
@@ -24,15 +29,13 @@ largeText2, saleTime, smallText, midText, desc, product, buttonText, image } }) 
                    <button type='button'>{buttonText}</button>
                   </Link>
               </div>
-              {/* {console.log("my image url is", urlFor(image).url())} */}
-              <Image 
-                // src={urlFor(image)} 
-                src={urlFor(image).url()} 
-                alt="Footer-Banner-Image" 
-                className='footer-banner-image' 
-                width={500} 
-                height={300}
-                priority //this tells next.js to prioritize loading this image (since its on the home page )           
+                <Image
+                    src={imageUrl}
+                    alt="Footer-Banner-Image"
+                    className='footer-banner-image'
+                    width={500}
+                    height={300}
+                    priority // this tells Next.js to prioritize loading this image (since it's on the home page)
                 />
           </div>
       </div>
