@@ -5,6 +5,7 @@ import {useStateContext} from '../../context/StateContext';
 import productsData from '../../data/productsData'; // Assuming this is your mock data file
 import Image from 'next/image';
 
+
 const ProductDetails = ({product, products}) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
