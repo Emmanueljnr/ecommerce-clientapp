@@ -1,4 +1,4 @@
-// pages/api/create-checkout-session.js
+// pages/api/Stripe.js
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import productsData from '../../data/productsData'; // Importing my local products data

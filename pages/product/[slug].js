@@ -5,27 +5,6 @@ import {useStateContext} from '../../context/StateContext';
 import productsData from '../../data/productsData'; // Assuming this is your mock data file
 import Image from 'next/image';
 
-// const handleBuyNow = async (product, quantity) => {
-//   console.log("Buy Now clicked", product, quantity); // This line is for debugging
-  
-//   // Call your API endpoint to create a Stripe Checkout Session
-//   const response = await fetch('/api/create-checkout-session', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ product, quantity }),
-//   });
-
-//   const session = await response.json();
-
-//   // Redirect to Stripe Checkout
-//   if (session.url) {
-//     window.location.href = session.url;
-//   }
-// };
-
-
 const ProductDetails = ({product, products}) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
