@@ -1,6 +1,6 @@
 const bannerData = [
     {
-      image: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm',
+      image: 'https://cdn.sanity.io/images/snwqipa6/production/a64b345016e96adfb8849af5521c8e0ecfe8f027-555x555.webp',
       discount: '20% OFF',
       largeText1: 'FINE',
       largeText2: 'SMILE',
