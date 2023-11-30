@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+     output: 'standalone', //reduces the size of Next js
     images: {
       domains: ['cdn.sanity.io'],
     },
@@ -15,3 +16,5 @@ const nextConfig = {
   };
   
   module.exports = nextConfig;
+
+  
