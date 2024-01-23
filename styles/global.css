@@ -20,8 +20,8 @@ a {
 max-width: 1400px; 
 margin: auto;
 width: 100%;
-
 }
+
 .layout{
   padding: 10px;
 }
@@ -152,12 +152,12 @@ width: 100%;
   font-size: 20px;
 }
 .hero-banner-container button{
-   border-radius: 15px;
+   border-radius: 10px;
   padding: 10px 16px;
   background-color: #f02d34;
   color: white;
   border: none;
-  margin-top: 40px;
+  margin-top: 25px;
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
@@ -259,7 +259,8 @@ text-align: end;
   /* top: -35%;
   left: 8%; */
   top: -25%;
-  left: 25%;
+  left: 27%;
+  width: 400px; /*Seems to work for now, but technically shouldnt be here*/
 }
 .banner-desc .right{
   line-height: 1.4;
@@ -770,4 +771,17 @@ margin-top: 160px;
   width: 300px;
   margin: auto;
 }
+
+/* payment page button  */
+.goBackButton {
+  width: 200px;
+  background-color: #f02d34;
+  margin-right: 10px; /* adjust the space between buttons */
+}
+
+.payAmountButton {
+  width: 300px;
+  background-color: #007bff;
+}
+
 }

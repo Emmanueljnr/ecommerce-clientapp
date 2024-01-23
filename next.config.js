@@ -2,7 +2,8 @@
 const nextConfig = {
   output: 'standalone', //reduces the size of Next js
     images: {
-      domains: ['cdn.sanity.io'],
+      domains: ['m.media-amazon.com'],
+      // domains: ['cdn.sanity.io'], 
     },
     async redirects() {
       return [

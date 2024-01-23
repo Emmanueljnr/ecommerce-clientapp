@@ -3,6 +3,8 @@ import { Toaster } from 'react-hot-toast';
 import Layout from '../components/Layout';
 import { StateContext } from '../context/StateContext';
 import '../styles/global.css';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'; //FOR THE FAKE PAYMENT PAGE
+
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,12 +1,15 @@
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-import productsData from '../../data/productsData';
+// import productsData from '../../data/productsData';
+
+const productsData = useFetchProducts;
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const cartItems = req.body;
     const lineItems = cartItems.map(item => {
-      const product = productsData.find(p => p._id === item._id);
+      //const product = productsData.find(p => p._id === item._id);
+      const product = productsData.find(p => p.id === item.id);
       const imageUrl = product.image[0];
 
       return {
